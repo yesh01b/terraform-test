@@ -5,7 +5,7 @@ trigger:
   
   paths:
     include:
-    - demo-rg
+    - terraform-test
 
 pool :
   - name: AzurePipelines
