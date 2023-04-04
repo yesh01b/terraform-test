@@ -1,0 +1,46 @@
+trigger:
+  branches:
+    include:
+    - none
+  
+  paths:
+    include:
+    - demo-rg
+
+pool :
+  - name: Azure Pipelines
+
+steps:
+- task : TerraformTaskV2@2
+  displayName: Intialise Terraform
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    backendServiceArm: 'Pay-As-You-Go (c28f6b93-1215-4e42-942b-3a26679a76bf)'
+    backendAzureRmResourceGroupName: 'rg-demo-01'
+    backendAzureRmStorageAccountName: 'demostorage0101'
+    backendAzureRmContainerName: 'demo01'
+    backendAzureRmKey: 'tf-terraform01278.tfstate'
+
+- task: TerraformTaskV2@2
+  displayName: 'Terraform Validate'
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- task: TerraformTaskV2@2
+  displayName: Terraform Plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceNameAzureRm: 'Pay-As-You-Go (c28f6b93-1215-4e42-942b-3a26679a76bf)'
+- task: TerraformTaskV2@2
+  displayName: Terraform Apply
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceNameAzureRm: 'Pay-As-You-Go (c28f6b93-1215-4e42-942b-3a26679a76bf)'
