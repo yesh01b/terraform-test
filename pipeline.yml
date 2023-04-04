@@ -7,8 +7,8 @@ trigger:
     include:
     - terraform-test
 
-pool :
-- name: AzurePipelines
+pool:
+  - name: Azure Pipelines
 
 steps:
 - task : TerraformTaskV2@2
