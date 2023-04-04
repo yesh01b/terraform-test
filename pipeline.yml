@@ -5,10 +5,10 @@ trigger:
   
   paths:
     include:
-    - demo-rg
+    - terraform-test
 
-pool :
-  - name: Azure Pipelines
+pool:
+  name: Azure Pipelines
 
 steps:
 - task : TerraformTaskV2@2
