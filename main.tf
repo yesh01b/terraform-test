@@ -22,4 +22,22 @@ resource "azurerm_key_vault" "rg" {
   resource_group_name         = azurerm_resource_group.rg.name
   tenant_id                   = "ded48db1-3ee4-4bae-abdf-841ad71064b7"
   sku_name = "standard"
+
+  access_policy {
+    tenant_id = "ded48db1-3ee4-4bae-abdf-841ad71064b7"
+    object_id = "f670434d-ecdd-426f-bb6e-adb7b85335c0"
+
+    key_permissions = [
+      "Get",
+    ]
+
+    secret_permissions = [
+      "Get",
+    ]
+
+    storage_permissions = [
+      "Get",
+    ]
+  }
 }
+
